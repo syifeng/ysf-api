@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ds.api.entity.mapper.ApiResponseMapper">
+    <resultMap id="BaseResultMap" type="com.ds.api.entity.model.ApiResponse">
+        <id column="uid" property="uid" jdbcType="BIGINT"/>
+        <result column="api_request_id" property="apiRequestId" jdbcType="BIGINT"/>
+        <result column="response_version" property="responseVersion" jdbcType="VARCHAR"/>
+        <result column="request_parameters" property="requestParameters" jdbcType="VARCHAR"/>
+        <result column="response_result" property="responseResult" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <resultMap id="BaseResultMapVo" type="com.ds.api.entity.vo.ApiResponseVo">
+        <id column="uid" property="uid" jdbcType="BIGINT"/>
+        <result column="api_request_id" property="apiRequestId" jdbcType="BIGINT"/>
+        <result column="response_version" property="responseVersion" jdbcType="VARCHAR"/>
+        <result column="request_parameters" property="requestParameters" jdbcType="VARCHAR"/>
+        <result column="response_result" property="responseResult" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    uid, api_request_id, response_version, request_parameters, response_result, create_time
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from api_response
+        where uid = #{uid,jdbcType=BIGINT}
+    </select>
+    <select id="selectByRequest" resultMap="BaseResultMapVo">
+        select
+        *
+        from api_response
+        where api_request_id = #{apiRequestId,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from api_response
+    where uid = #{uid,jdbcType=BIGINT}
+  </delete>
+    <delete id="deleteByRequest">
+        DELETE FROM  api_response
+    where api_request_id = #{apiRequestId,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.ds.api.entity.model.ApiResponse">
+    insert into api_response (uid, api_request_id, response_version,
+      request_parameters, response_result, create_time
+      )
+    values (#{uid,jdbcType=BIGINT}, #{apiRequestId,jdbcType=BIGINT}, #{responseVersion,jdbcType=VARCHAR},
+      #{requestParameters,jdbcType=VARCHAR}, #{responseResult,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.ds.api.entity.model.ApiResponse">
+        insert into api_response
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uid != null">
+                uid,
+            </if>
+            <if test="apiRequestId != null">
+                api_request_id,
+            </if>
+            <if test="responseVersion != null">
+                response_version,
+            </if>
+            <if test="requestParameters != null">
+                request_parameters,
+            </if>
+            <if test="responseResult != null">
+                response_result,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="uid != null">
+                #{uid,jdbcType=BIGINT},
+            </if>
+            <if test="apiRequestId != null">
+                #{apiRequestId,jdbcType=BIGINT},
+            </if>
+            <if test="responseVersion != null">
+                #{responseVersion,jdbcType=VARCHAR},
+            </if>
+            <if test="requestParameters != null">
+                #{requestParameters,jdbcType=VARCHAR},
+            </if>
+            <if test="responseResult != null">
+                #{responseResult,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ds.api.entity.model.ApiResponse">
+        update api_response
+        <set>
+            <if test="apiRequestId != null">
+                api_request_id = #{apiRequestId,jdbcType=BIGINT},
+            </if>
+            <if test="responseVersion != null">
+                response_version = #{responseVersion,jdbcType=VARCHAR},
+            </if>
+            <if test="requestParameters != null">
+                request_parameters = #{requestParameters,jdbcType=VARCHAR},
+            </if>
+            <if test="responseResult != null">
+                response_result = #{responseResult,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where uid = #{uid,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ds.api.entity.model.ApiResponse">
+    update api_response
+    set api_request_id = #{apiRequestId,jdbcType=BIGINT},
+      response_version = #{responseVersion,jdbcType=VARCHAR},
+      request_parameters = #{requestParameters,jdbcType=VARCHAR},
+      response_result = #{responseResult,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where uid = #{uid,jdbcType=BIGINT}
+  </update>
+    <delete id="deleteByModule">
+    delete from api_response
+    where api_request_id in
+    (
+    select uid from api_request where
+    api_module_id = #{moduleId}
+    )
+    </delete>
+</mapper>

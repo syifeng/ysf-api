@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ds.api.entity.mapper.ApiRequestMapper" >
+  <resultMap id="BaseResultMap" type="com.ds.api.entity.model.ApiRequest" >
+    <id column="uid" property="uid" jdbcType="BIGINT" />
+    <result column="uname" property="uname" jdbcType="VARCHAR" />
+    <result column="api_project_id" property="apiProjectId" jdbcType="BIGINT" />
+    <result column="api_module_id" property="apiModuleId" jdbcType="BIGINT" />
+    <result column="request_uri" property="requestUri" jdbcType="VARCHAR" />
+    <result column="request_method" property="requestMethod" jdbcType="VARCHAR" />
+    <result column="response_standard" property="responseStandard" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="intro" property="intro" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="BaseResultMapVo" type="com.ds.api.entity.vo.ApiRequestVo" >
+    <id column="uid" property="uid" jdbcType="BIGINT" />
+    <result column="uname" property="uname" jdbcType="VARCHAR" />
+    <result column="api_project_id" property="apiProjectId" jdbcType="BIGINT" />
+    <result column="api_module_id" property="apiModuleId" jdbcType="BIGINT" />
+    <result column="request_uri" property="requestUri" jdbcType="VARCHAR" />
+    <result column="request_method" property="requestMethod" jdbcType="VARCHAR" />
+    <result column="response_standard" property="responseStandard" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="intro" property="intro" jdbcType="VARCHAR" />
+    <result column="projectName" property="projectName" jdbcType="VARCHAR" />
+    <result column="moduleName" property="moduleName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    uid, uname, api_project_id, api_module_id, request_uri, request_method, response_standard, 
+    create_time, modify_time, status, intro
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from api_request
+    where uid = #{uid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from api_request
+    where uid = #{uid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ds.api.entity.model.ApiRequest" >
+    insert into api_request (uid, uname, api_project_id, 
+      api_module_id, request_uri, request_method, 
+      response_standard, create_time, modify_time, 
+      status, intro)
+    values (#{uid,jdbcType=BIGINT}, #{uname,jdbcType=VARCHAR}, #{apiProjectId,jdbcType=BIGINT}, 
+      #{apiModuleId,jdbcType=BIGINT}, #{requestUri,jdbcType=VARCHAR}, #{requestMethod,jdbcType=VARCHAR},
+      #{responseStandard,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=INTEGER}, #{intro,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertVo" parameterType="com.ds.api.entity.vo.ApiRequestVo" >
+    insert into api_request (uid, uname, api_project_id,
+      api_module_id, request_uri, request_method,
+      response_standard, create_time, modify_time,
+      status, intro)
+    values (#{uid,jdbcType=BIGINT}, #{uname,jdbcType=VARCHAR}, #{apiProjectId,jdbcType=BIGINT},
+      #{apiModuleId,jdbcType=BIGINT}, #{requestUri,jdbcType=VARCHAR}, #{requestMethod,jdbcType=VARCHAR},
+      #{responseStandard,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP},
+      #{status,jdbcType=INTEGER}, #{intro,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ds.api.entity.model.ApiRequest" >
+    insert into api_request
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="uname != null" >
+        uname,
+      </if>
+      <if test="apiProjectId != null" >
+        api_project_id,
+      </if>
+      <if test="apiModuleId != null" >
+        api_module_id,
+      </if>
+      <if test="requestUri != null" >
+        request_uri,
+      </if>
+      <if test="requestMethod != null" >
+        request_method,
+      </if>
+      <if test="responseStandard != null" >
+        response_standard,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="modifyTime != null" >
+        modify_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="intro != null" >
+        intro,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="uname != null" >
+        #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="apiProjectId != null" >
+        #{apiProjectId,jdbcType=BIGINT},
+      </if>
+      <if test="apiModuleId != null" >
+        #{apiModuleId,jdbcType=BIGINT},
+      </if>
+      <if test="requestUri != null" >
+        #{requestUri,jdbcType=VARCHAR},
+      </if>
+      <if test="requestMethod != null" >
+        #{requestMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="responseStandard != null" >
+        #{responseStandard,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="intro != null" >
+        #{intro,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ds.api.entity.model.ApiRequest" >
+    update api_request
+    <set >
+      <if test="uname != null" >
+        uname = #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="apiProjectId != null" >
+        api_project_id = #{apiProjectId,jdbcType=BIGINT},
+      </if>
+      <if test="apiModuleId != null" >
+        api_module_id = #{apiModuleId,jdbcType=BIGINT},
+      </if>
+      <if test="requestUri != null" >
+        request_uri = #{requestUri,jdbcType=VARCHAR},
+      </if>
+      <if test="requestMethod != null" >
+        request_method = #{requestMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="responseStandard != null" >
+        response_standard = #{responseStandard,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="intro != null" >
+        intro = #{intro,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where uid = #{uid,jdbcType=BIGINT}
+  </update>
+  <update id="updateVo" parameterType="com.ds.api.entity.vo.ApiRequestVo" >
+    update api_request
+    <set >
+      <if test="uname != null" >
+        uname = #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="apiProjectId != null" >
+        api_project_id = #{apiProjectId,jdbcType=BIGINT},
+      </if>
+      <if test="apiModuleId != null" >
+        api_module_id = #{apiModuleId,jdbcType=BIGINT},
+      </if>
+      <if test="requestUri != null" >
+        request_uri = #{requestUri,jdbcType=VARCHAR},
+      </if>
+      <if test="requestMethod != null" >
+        request_method = #{requestMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="responseStandard != null" >
+        response_standard = #{responseStandard,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="intro != null" >
+        intro = #{intro,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where uid = #{uid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ds.api.entity.model.ApiRequest" >
+    update api_request
+    set uname = #{uname,jdbcType=VARCHAR},
+      api_project_id = #{apiProjectId,jdbcType=BIGINT},
+      api_module_id = #{apiModuleId,jdbcType=BIGINT},
+      request_uri = #{requestUri,jdbcType=VARCHAR},
+      request_method = #{requestMethod,jdbcType=VARCHAR},
+      response_standard = #{responseStandard,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      intro = #{intro,jdbcType=VARCHAR}
+    where uid = #{uid,jdbcType=BIGINT}
+  </update>
+  <select id="selectByVo" parameterType="com.ds.api.entity.vo.ApiRequestVo" resultMap="BaseResultMapVo">
+    select req.*, pro.uname projectName, modu.uname moduleName from api_request req
+    left join api_project pro
+    on req.api_project_id = pro.uid
+    left join api_module modu
+    on req.api_module_id = modu.uid
+    WHERE 1=1
+    <if test="uname != null and uname != ''" >
+      AND req.uname LIKE concat('%', #{uname,jdbcType=VARCHAR}, '%')
+    </if>
+    <if test="apiProjectId != null" >
+      AND req.api_project_id = #{apiProjectId,jdbcType=BIGINT}
+    </if>
+    <if test="apiModuleId != null" >
+      AND req.api_module_id = #{apiModuleId,jdbcType=BIGINT}
+    </if>
+    <if test="requestUri != null and requestUri != ''" >
+      AND req.request_uri LIKE concat('%', #{requestUri,jdbcType=VARCHAR}, '%')
+    </if>
+    <if test="requestMethod != null" >
+      AND req.request_method = #{requestMethod,jdbcType=VARCHAR}
+    </if>
+    <if test="responseStandard != null" >
+      and req.response_standard = #{responseStandard,jdbcType=VARCHAR}
+    </if>
+    <if test="status != null" >
+      AND req.status = #{status,jdbcType=INTEGER}
+    </if>
+  </select>
+  <select id="selectVo" parameterType="java.lang.Long" resultMap="BaseResultMapVo">
+    SELECT req.*, modu.uname moduleName, pro.uname projectName FROM api_request req
+    left join api_module modu
+    on req.api_module_id = modu.uid
+    left join api_project pro
+    on req.api_project_id = pro.uid
+    WHERE req.uid = #{uid}
+  </select>
+
+  <delete id="deleteByModule">
+    DELETE FROM api_request
+    WHERE api_module_id = #{moduleId}
+  </delete>
+</mapper>

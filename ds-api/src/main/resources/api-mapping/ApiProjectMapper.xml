@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ds.api.entity.mapper.ApiProjectMapper">
+  <resultMap id="BaseResultMap" type="com.ds.api.entity.model.ApiProject">
+    <id column="uid" jdbcType="BIGINT" property="uid" />
+    <result column="uname" jdbcType="VARCHAR" property="uname" />
+    <result column="test_domain" jdbcType="VARCHAR" property="testDomain" />
+    <result column="ready_domain" jdbcType="VARCHAR" property="readyDomain" />
+    <result column="product_domain" jdbcType="VARCHAR" property="productDomain" />
+    <result column="intro" jdbcType="VARCHAR" property="intro" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="pro_num" jdbcType="VARCHAR" property="proNum" />
+    <result column="host_name" jdbcType="VARCHAR" property="hostName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    uid, uname, test_domain, ready_domain, product_domain, intro, create_time, pro_num, 
+    host_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from api_project
+    where uid = #{uid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from api_project
+    where uid = #{uid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ds.api.entity.model.ApiProject">
+    insert into api_project (uid, uname, test_domain, 
+      ready_domain, product_domain, intro, 
+      create_time, pro_num, host_name
+      )
+    values (#{uid,jdbcType=BIGINT}, #{uname,jdbcType=VARCHAR}, #{testDomain,jdbcType=VARCHAR}, 
+      #{readyDomain,jdbcType=VARCHAR}, #{productDomain,jdbcType=VARCHAR}, #{intro,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{proNum,jdbcType=VARCHAR}, #{hostName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ds.api.entity.model.ApiProject">
+    insert into api_project
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="uname != null">
+        uname,
+      </if>
+      <if test="testDomain != null">
+        test_domain,
+      </if>
+      <if test="readyDomain != null">
+        ready_domain,
+      </if>
+      <if test="productDomain != null">
+        product_domain,
+      </if>
+      <if test="intro != null">
+        intro,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="proNum != null">
+        pro_num,
+      </if>
+      <if test="hostName != null">
+        host_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="uname != null">
+        #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="testDomain != null">
+        #{testDomain,jdbcType=VARCHAR},
+      </if>
+      <if test="readyDomain != null">
+        #{readyDomain,jdbcType=VARCHAR},
+      </if>
+      <if test="productDomain != null">
+        #{productDomain,jdbcType=VARCHAR},
+      </if>
+      <if test="intro != null">
+        #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="proNum != null">
+        #{proNum,jdbcType=VARCHAR},
+      </if>
+      <if test="hostName != null">
+        #{hostName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ds.api.entity.model.ApiProject">
+    update api_project
+    <set>
+      <if test="uname != null">
+        uname = #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="testDomain != null">
+        test_domain = #{testDomain,jdbcType=VARCHAR},
+      </if>
+      <if test="readyDomain != null">
+        ready_domain = #{readyDomain,jdbcType=VARCHAR},
+      </if>
+      <if test="productDomain != null">
+        product_domain = #{productDomain,jdbcType=VARCHAR},
+      </if>
+      <if test="intro != null">
+        intro = #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="proNum != null">
+        pro_num = #{proNum,jdbcType=VARCHAR},
+      </if>
+      <if test="hostName != null">
+        host_name = #{hostName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where uid = #{uid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ds.api.entity.model.ApiProject">
+    update api_project
+    set uname = #{uname,jdbcType=VARCHAR},
+      test_domain = #{testDomain,jdbcType=VARCHAR},
+      ready_domain = #{readyDomain,jdbcType=VARCHAR},
+      product_domain = #{productDomain,jdbcType=VARCHAR},
+      intro = #{intro,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      pro_num = #{proNum,jdbcType=VARCHAR},
+      host_name = #{hostName,jdbcType=VARCHAR}
+    where uid = #{uid,jdbcType=BIGINT}
+  </update>
+
+  <resultMap id="BaseResultMapVo" type="com.ds.api.entity.vo.ApiProjectVo">
+    <id column="uid" jdbcType="BIGINT" property="uid" />
+    <result column="uname" jdbcType="VARCHAR" property="uname" />
+    <result column="test_domain" jdbcType="VARCHAR" property="testDomain" />
+    <result column="ready_domain" jdbcType="VARCHAR" property="readyDomain" />
+    <result column="product_domain" jdbcType="VARCHAR" property="productDomain" />
+    <result column="intro" jdbcType="VARCHAR" property="intro" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="pro_num" jdbcType="VARCHAR" property="proNum" />
+    <result column="host_name" jdbcType="VARCHAR" property="hostName" />
+  </resultMap>
+
+  <select id="selectByVo" parameterType="com.ds.api.entity.vo.ApiProjectVo" resultMap="BaseResultMapVo">
+    SELECT * FROM api_project
+    WHERE 1=1
+    <if test="uname != null and uname != ''">
+      AND uname LIKE concat('%', #{uname,jdbcType=VARCHAR}, '%')
+    </if>
+    <if test="testDomain != null and testDomain != ''">
+      AND test_domain LIKE concat('%', #{testDomain,jdbcType=VARCHAR}, '%')
+    </if>
+    <if test="productDomain != null and productDomain != ''">
+      AND product_domain LIKE concat('%', #{productDomain,jdbcType=VARCHAR}, '%')
+    </if>
+    <if test="intro != null and intro != ''">
+      AND intro LIKE concat('%', #{intro,jdbcType=VARCHAR}, '%')
+    </if>
+    <if test="createTime != null">
+      AND create_time = #{createTime,jdbcType=TIMESTAMP}
+    </if>
+  </select>
+    <select id="selectByHostName" parameterType="java.lang.String" resultMap="BaseResultMapVo">
+      SELECT * FROM api_project
+      WHERE host_name = #{hostName}
+    </select>
+
+  <insert id="insertVo" parameterType="com.ds.api.entity.vo.ApiProjectVo">
+    insert into api_project
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="uname != null">
+        uname,
+      </if>
+      <if test="testDomain != null">
+        test_domain,
+      </if>
+      <if test="readyDomain != null">
+        ready_domain,
+      </if>
+      <if test="productDomain != null">
+        product_domain,
+      </if>
+      <if test="intro != null">
+        intro,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="proNum != null">
+        pro_num,
+      </if>
+      <if test="hostName != null">
+        host_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="uname != null">
+        #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="testDomain != null">
+        #{testDomain,jdbcType=VARCHAR},
+      </if>
+      <if test="readyDomain != null">
+        #{readyDomain,jdbcType=VARCHAR},
+      </if>
+      <if test="productDomain != null">
+        #{productDomain,jdbcType=VARCHAR},
+      </if>
+      <if test="intro != null">
+        #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="proNum != null">
+        #{proNum,jdbcType=VARCHAR},
+      </if>
+      <if test="hostName != null">
+        #{hostName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="selectVo" resultMap="BaseResultMapVo">
+    SELECT * FROM api_project
+    WHERE uid = #{uid}
+  </select>
+</mapper>

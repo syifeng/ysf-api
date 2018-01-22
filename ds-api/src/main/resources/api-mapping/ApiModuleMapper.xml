@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ds.api.entity.mapper.ApiModuleMapper" >
+  <resultMap id="BaseResultMap" type="com.ds.api.entity.model.ApiModule" >
+    <id column="uid" property="uid" jdbcType="BIGINT" />
+    <result column="api_project_id" property="apiProjectId" jdbcType="BIGINT" />
+    <result column="uname" property="uname" jdbcType="VARCHAR" />
+    <result column="intro" property="intro" jdbcType="VARCHAR" />
+    <result column="api_code" property="apiCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="BaseResultMapVo" type="com.ds.api.entity.vo.ApiModuleVo" >
+    <id column="uid" property="uid" jdbcType="BIGINT" />
+    <result column="api_project_id" property="apiProjectId" jdbcType="BIGINT" />
+    <result column="uname" property="uname" jdbcType="VARCHAR" />
+    <result column="intro" property="intro" jdbcType="VARCHAR" />
+    <result column="api_code" property="apiCode" jdbcType="VARCHAR" />
+    <result column="projectName" property="projectName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    uid, api_project_id, uname, intro, api_code
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from api_module
+    where uid = #{uid,jdbcType=BIGINT}
+  </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from api_module
+    where uid = #{uid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ds.api.entity.model.ApiModule" >
+    insert into api_module (uid, api_project_id, uname, 
+      intro, api_code)
+    values (#{uid,jdbcType=BIGINT}, #{apiProjectId,jdbcType=BIGINT}, #{uname,jdbcType=VARCHAR}, 
+      #{intro,jdbcType=VARCHAR}, #{apiCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ds.api.entity.model.ApiModule" >
+    insert into api_module
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="apiProjectId != null" >
+        api_project_id,
+      </if>
+      <if test="uname != null" >
+        uname,
+      </if>
+      <if test="intro != null" >
+        intro,
+      </if>
+      <if test="apiCode != null" >
+        api_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="apiProjectId != null" >
+        #{apiProjectId,jdbcType=BIGINT},
+      </if>
+      <if test="uname != null" >
+        #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="intro != null" >
+        #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="apiCode != null" >
+        #{apiCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ds.api.entity.model.ApiModule" >
+    update api_module
+    <set >
+      <if test="apiProjectId != null" >
+        api_project_id = #{apiProjectId,jdbcType=BIGINT},
+      </if>
+      <if test="uname != null" >
+        uname = #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="intro != null" >
+        intro = #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="apiCode != null" >
+        api_code = #{apiCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where uid = #{uid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ds.api.entity.model.ApiModule" >
+    update api_module
+    set api_project_id = #{apiProjectId,jdbcType=BIGINT},
+      uname = #{uname,jdbcType=VARCHAR},
+      intro = #{intro,jdbcType=VARCHAR},
+      api_code = #{apiCode,jdbcType=VARCHAR}
+    where uid = #{uid,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByApiCode" resultMap="BaseResultMapVo" parameterType="java.lang.String">
+    SELECT * FROM api_module
+    WHERE api_code = #{apiCode,jdbcType=VARCHAR}
+  </select>
+
+  <insert id="insertVo" parameterType="com.ds.api.entity.vo.ApiModuleVo">
+    insert into api_module
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="apiProjectId != null" >
+        api_project_id,
+      </if>
+      <if test="uname != null" >
+        uname,
+      </if>
+      <if test="intro != null" >
+        intro,
+      </if>
+      <if test="apiCode != null" >
+        api_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="apiProjectId != null" >
+        #{apiProjectId,jdbcType=BIGINT},
+      </if>
+      <if test="uname != null" >
+        #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="intro != null" >
+        #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="apiCode != null" >
+        #{apiCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <select id="selectByVo" resultMap="BaseResultMapVo">
+    SELECT modu.*, pro.uname projectName from api_module modu
+    left join api_project pro
+    on modu.api_project_id = pro.uid
+    where 1=1
+    <if test="apiProjectId != null" >
+      AND modu.api_project_id = #{apiProjectId,jdbcType=BIGINT}
+    </if>
+    <if test="uname != null" >
+      and modu.uname like concat("%", #{uname,jdbcType=VARCHAR}, "%")
+    </if>
+    <if test="apiCode != null" >
+      and modu.api_code like concat("%", #{apiCode,jdbcType=VARCHAR}, "%")
+    </if>
+  </select>
+
+  <select id="selectVo" resultMap="BaseResultMapVo">
+    select modu.*, pro.uname projectName from api_module modu
+    left join api_project pro
+    on modu.api_project_id = pro.uid
+    where modu.uid = #{uid}
+  </select>
+</mapper>

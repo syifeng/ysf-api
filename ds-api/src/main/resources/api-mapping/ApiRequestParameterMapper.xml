@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ds.api.entity.mapper.ApiRequestParameterMapper" >
+  <resultMap id="BaseResultMap" type="com.ds.api.entity.model.ApiRequestParameter" >
+    <id column="api_request_id" property="apiRequestId" jdbcType="BIGINT" />
+    <id column="field_key" property="fieldKey" jdbcType="VARCHAR" />
+    <result column="uid" property="uid" jdbcType="BIGINT" />
+    <result column="uname" property="uname" jdbcType="VARCHAR" />
+    <result column="field_value" property="fieldValue" jdbcType="VARCHAR" />
+    <result column="field_default" property="fieldDefault" jdbcType="VARCHAR" />
+    <result column="intro" property="intro" jdbcType="VARCHAR" />
+    <result column="field_grade" property="fieldGrade" jdbcType="INTEGER" />
+    <result column="field_type" property="fieldType" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    api_request_id, field_key, uid, uname, field_value, field_default, intro, field_grade, 
+    field_type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.ds.api.entity.model.ApiRequestParameter" >
+    select 
+    <include refid="Base_Column_List" />
+    from api_request_parameter
+    where api_request_id = #{apiRequestId,jdbcType=BIGINT}
+      and field_key = #{fieldKey,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.ds.api.entity.model.ApiRequestParameter" >
+    delete from api_request_parameter
+    where api_request_id = #{apiRequestId,jdbcType=BIGINT}
+      and field_key = #{fieldKey,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ds.api.entity.model.ApiRequestParameter" >
+    insert into api_request_parameter (api_request_id, field_key, uid, 
+      uname, field_value, field_default, 
+      intro, field_grade, field_type
+      )
+    values (#{apiRequestId,jdbcType=BIGINT}, #{fieldKey,jdbcType=VARCHAR}, #{uid,jdbcType=BIGINT}, 
+      #{uname,jdbcType=VARCHAR}, #{fieldValue,jdbcType=VARCHAR}, #{fieldDefault,jdbcType=VARCHAR}, 
+      #{intro,jdbcType=VARCHAR}, #{fieldGrade,jdbcType=INTEGER}, #{fieldType,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ds.api.entity.model.ApiRequestParameter" >
+    insert into api_request_parameter
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="apiRequestId != null" >
+        api_request_id,
+      </if>
+      <if test="fieldKey != null" >
+        field_key,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="uname != null" >
+        uname,
+      </if>
+      <if test="fieldValue != null" >
+        field_value,
+      </if>
+      <if test="fieldDefault != null" >
+        field_default,
+      </if>
+      <if test="intro != null" >
+        intro,
+      </if>
+      <if test="fieldGrade != null" >
+        field_grade,
+      </if>
+      <if test="fieldType != null" >
+        field_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="apiRequestId != null" >
+        #{apiRequestId,jdbcType=BIGINT},
+      </if>
+      <if test="fieldKey != null" >
+        #{fieldKey,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="uname != null" >
+        #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldValue != null" >
+        #{fieldValue,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldDefault != null" >
+        #{fieldDefault,jdbcType=VARCHAR},
+      </if>
+      <if test="intro != null" >
+        #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldGrade != null" >
+        #{fieldGrade,jdbcType=INTEGER},
+      </if>
+      <if test="fieldType != null" >
+        #{fieldType,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ds.api.entity.model.ApiRequestParameter" >
+    update api_request_parameter
+    <set >
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="uname != null" >
+        uname = #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldValue != null" >
+        field_value = #{fieldValue,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldDefault != null" >
+        field_default = #{fieldDefault,jdbcType=VARCHAR},
+      </if>
+      <if test="intro != null" >
+        intro = #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldGrade != null" >
+        field_grade = #{fieldGrade,jdbcType=INTEGER},
+      </if>
+      <if test="fieldType != null" >
+        field_type = #{fieldType,jdbcType=INTEGER},
+      </if>
+    </set>
+    where api_request_id = #{apiRequestId,jdbcType=BIGINT}
+      and field_key = #{fieldKey,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ds.api.entity.model.ApiRequestParameter" >
+    update api_request_parameter
+    set uid = #{uid,jdbcType=BIGINT},
+      uname = #{uname,jdbcType=VARCHAR},
+      field_value = #{fieldValue,jdbcType=VARCHAR},
+      field_default = #{fieldDefault,jdbcType=VARCHAR},
+      intro = #{intro,jdbcType=VARCHAR},
+      field_grade = #{fieldGrade,jdbcType=INTEGER},
+      field_type = #{fieldType,jdbcType=INTEGER}
+    where api_request_id = #{apiRequestId,jdbcType=BIGINT}
+      and field_key = #{fieldKey,jdbcType=VARCHAR}
+  </update>
+
+
+
+  <resultMap id="BaseResultMapVo" type="com.ds.api.entity.vo.ApiRequestParameterVo">
+    <id column="api_request_id" property="apiRequestId" jdbcType="BIGINT" />
+    <id column="field_key" property="fieldKey" jdbcType="VARCHAR" />
+    <result column="uid" property="uid" jdbcType="BIGINT" />
+    <result column="uname" property="uname" jdbcType="VARCHAR" />
+    <result column="field_value" property="fieldValue" jdbcType="VARCHAR" />
+    <result column="field_default" property="fieldDefault" jdbcType="VARCHAR" />
+    <result column="intro" property="intro" jdbcType="VARCHAR" />
+    <result column="field_grade" property="fieldGrade" jdbcType="INTEGER" />
+    <result column="field_type" property="fieldType" jdbcType="INTEGER" />
+  </resultMap>
+  <select id="selectByVo" resultMap="BaseResultMapVo">
+    SELECT arp.* from api_request_parameter arp
+    WHERE api_request_id = #{apiRequestId,jdbcType=BIGINT}
+  </select>
+  <select id="selectByRequest" resultMap="BaseResultMapVo">
+    SELECT arp.* from api_request_parameter arp
+    WHERE api_request_id = #{apiRequestId,jdbcType=BIGINT}
+  </select>
+  <insert id="insertVos" parameterType="com.ds.api.entity.vo.ApiRequestParameterVo">
+    insert into api_request_parameter (uid, uname, field_key,
+    field_value, field_default, api_request_id,
+    intro,field_grade,field_type)
+    values
+    <foreach collection="list" index="index" item="field" separator=",">
+      (#{field.uid,jdbcType=BIGINT}, #{field.uname,jdbcType=VARCHAR}, #{field.fieldKey,jdbcType=VARCHAR},
+      #{field.fieldValue,jdbcType=VARCHAR}, #{field.fieldDefault,jdbcType=VARCHAR},
+      #{field.apiRequestId,jdbcType=BIGINT},
+      #{field.intro,jdbcType=VARCHAR},#{field.fieldGrade,jdbcType=INTEGER},#{field.fieldType,jdbcType=INTEGER})
+    </foreach>
+  </insert>
+  <insert id="replaceVos" parameterType="com.ds.api.entity.vo.ApiRequestParameterVo">
+    replace INTO api_request_parameter
+    (uid, field_key,
+    field_value, field_default, api_request_id,intro,field_grade,field_type)
+    values
+    <foreach collection="list" index="index" item="field" separator=",">
+      (#{field.uid,jdbcType=BIGINT}, #{field.fieldKey,jdbcType=VARCHAR},
+      #{field.fieldValue,jdbcType=VARCHAR}, #{field.fieldDefault,jdbcType=VARCHAR},
+      #{field.apiRequestId,jdbcType=BIGINT},
+      #{field.intro,jdbcType=VARCHAR},#{field.fieldGrade,jdbcType=INTEGER},#{field.fieldType,jdbcType=INTEGER})
+    </foreach>
+  </insert>
+
+  <delete id="deleteByModule">
+    delete from api_request_parameter
+    where api_request_id in
+    (
+    select uid from api_request where
+    api_module_id = #{moduleId}
+    )
+  </delete>
+  <delete id="deleteByRequest">
+    delete from api_request_parameter
+    where api_request_id = #{requestId}
+  </delete>
+</mapper>
