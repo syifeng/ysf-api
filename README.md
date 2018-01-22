@@ -1,6 +1,5 @@
-# ds-api
-demo
-<a href="http://47.93.184.160:8082/ds-api/bc/project/projects">demo</a>
+# <a href="http://47.93.184.160:8082/ds-api/bc/project/projects" target="_blank">ds-api</a>
+<a href="http://47.93.184.160:8082/ds-api/bc/project/projects">查看demo</a>
 自动化接口生成管理系统
 
 在你写代码调代码的时候自动生成接口的地址，请求，结果等信息
