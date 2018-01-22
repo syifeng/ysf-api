@@ -3,4 +3,4 @@
 
 在你写代码调代码的时候自动生成接口的地址，请求，结果等信息
 
- ![image]（https://github.com/syifeng/ysf-api/tree/master/img/img-1.png)
+![](https://github.com/syifeng/ysf-api/blob/master/img/img-1.png)
